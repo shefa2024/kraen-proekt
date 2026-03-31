@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- v2.0 update -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnConnect - Learn Anything, Anytime with Expert Teachers</title>
+    <meta name="description"
+        content="Connect with qualified teachers for personalized one-on-one lessons. Master new skills at your own pace with flexible scheduling.">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+
+            <div class="nav-brand">
+                <img class="logo-image" src="logo.png" alt="PrivateExtracurriculars Logo" style="height: 60px; width: auto;">
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#teachers" class="nav-link">Find Teachers</a>
+            </div>
+            <div class="nav-actions">
+                <button class="btn btn-text" id="loginBtn">Log In</button>
+                <button class="btn btn-primary" id="signupBtn">Sign Up</button>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" class="mobile-link">Home</a>
+        <a href="#teachers" class="mobile-link">Find Teachers</a>
+        <button class="btn btn-text btn-block">Log In</button>
+        <button class="btn btn-primary btn-block">Sign Up</button>
+    </div>
+
+    <!-- Main Content Container -->
+    <main id="app">
+        <!-- This will be dynamically populated by JavaScript -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="nav-brand footer-logo">
+                        <img class="logo-image" src="logo.png" alt="PrivateExtracurriculars Logo" style="height: 60px; width: auto;">
+                    </div>
+                    <p class="footer-description">
+                        Empowering students and teachers to connect, learn, and grow together. Join our community today.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#teachers">Find Teachers</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-list">
+                        <li>
+                            <span class="contact-icon">📧</span>
+                            <a href="mailto:hello@learnconnect.com">hello@learnconnect.com</a>
+                        </li>
+                        <li>
+                            <span class="contact-icon">📞</span>
+                            <a href="tel:+1234567890">+1 (234) 567-890</a>
+                        </li>
+                        <li>
+                            <span class="contact-icon">📍</span>
+                            <span>123 Learning Street, Education City</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 LearnConnect. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Log In</button>
+                    <button class="auth-tab" data-tab="signup">Sign Up</button>
+                </div>
+
+                <!-- Login Form -->
+                <form class="auth-form active" id="loginForm">
+                    <h2>Welcome Back</h2>
+                    <p class="form-subtitle">Log in to continue your learning journey</p>
+
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" class="form-input" placeholder="your@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
+                    </div>
+
+                    <div class="form-error" id="loginError"></div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Log In</button>
+                </form>
+
+                <!-- Signup Form -->
+                <form class="auth-form" id="signupForm">
+                    <h2>Create Account</h2>
+                    <p class="form-subtitle">Start learning with expert teachers today</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="signupFirstName">First Name</label>
+                            <input type="text" id="signupFirstName" class="form-input" placeholder="John" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupLastName">Last Name</label>
+                            <input type="text" id="signupLastName" class="form-input" placeholder="Doe" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" class="form-input" placeholder="your@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" class="form-input" placeholder="••••••••" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupRole">I want to</label>
+                        <select id="signupRole" class="form-input" required>
+                            <option value="Student">Learn (Student)</option>
+                            <option value="Parent">Manage my child's learning (Parent)</option>
+                            <option value="Teacher">Teach (Teacher)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-error" id="signupError"></div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="toastContainer" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/videocall.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
