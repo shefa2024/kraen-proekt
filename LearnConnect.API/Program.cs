@@ -48,12 +48,11 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// Configure Database
+// Configure Database - Switched to PostgreSQL
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection") ?? 
-        "Server=(localdb)\\mssqllocaldb;Database=LearnConnectDB_V2;Trusted_Connection=true;TrustServerCertificate=true",
-        sqlOptions => sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        npgsqlOptions => npgsqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
 
 // Configure JWT Authentication
 var jwtSecret = builder.Configuration["Jwt:Secret"] ?? "YourSuperSecretKeyForJWTTokenGeneration12345!";
@@ -110,8 +109,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-// app.UseHttpsRedirection();
-
+// app.UseCors
 app.UseCors("AllowAll");
 
 app.UseAuthentication();
@@ -135,42 +133,12 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<ApplicationDbContext>();
-        // Apply any pending migrations
-        // context.Database.EnsureDeleted(); // Removed to prevent data loss
         context.Database.Migrate();
-
-        // Ensure LessonPackages table exists and LessonPackageId column exists in Lessons table
-        // This is a manual fix for the missing migration issue
-        string sql = @"
-            IF OBJECT_ID(N'[LessonPackages]', N'U') IS NULL 
-            BEGIN
-                CREATE TABLE [LessonPackages] (
-                    [Id] int PRIMARY KEY IDENTITY(1, 1),
-                    [StudentId] int NOT NULL,
-                    [TeacherId] int NOT NULL,
-                    [SubjectId] int NOT NULL,
-                    [TotalLessons] int NOT NULL,
-                    [RemainingLessons] int NOT NULL,
-                    [TotalPrice] decimal(18, 2) NOT NULL,
-                    [Status] int NOT NULL,
-                    [CreatedAt] datetime2 NOT NULL,
-                    CONSTRAINT [FK_LessonPackages_Students_StudentId] FOREIGN KEY ([StudentId]) REFERENCES [Students] ([Id]) ON DELETE NO ACTION,
-                    CONSTRAINT [FK_LessonPackages_Teachers_TeacherId] FOREIGN KEY ([TeacherId]) REFERENCES [Teachers] ([Id]) ON DELETE NO ACTION
-                );
-            END
-
-            IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID(N'[Lessons]') AND name = 'LessonPackageId')
-            BEGIN
-                ALTER TABLE [Lessons] ADD [LessonPackageId] int NULL;
-                ALTER TABLE [Lessons] ADD CONSTRAINT [FK_Lessons_LessonPackages_LessonPackageId] FOREIGN KEY ([LessonPackageId]) REFERENCES [LessonPackages] ([Id]) ON DELETE NO ACTION;
-            END
-        ";
-        context.Database.ExecuteSqlRaw(sql);
     }
     catch (Exception ex)
     {
         var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred creating the DB.");
+        logger.LogError(ex, "An error occurred migrating the DB.");
     }
 }
 
