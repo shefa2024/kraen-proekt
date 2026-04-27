@@ -1,0 +1,12 @@
+bin/
+obj/
+.git/
+.vs/
+.vscode/
+.github/
+LearnConnect.Tests/bin/
+LearnConnect.Tests/obj/
+LearnConnect.API/bin/
+LearnConnect.API/obj/
+*.sqlite
+*.db
