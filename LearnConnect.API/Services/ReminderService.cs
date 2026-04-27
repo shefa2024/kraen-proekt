@@ -62,7 +62,7 @@ public class ReminderService : BackgroundService
                 SenderId = 1, // System / Admin
                 ReceiverId = l.Student.UserId,
                 Content = $"Reminder: You have a scheduled lesson with {l.Teacher.User.FirstName} tomorrow at {l.ScheduledDateTime:HH:mm}.",
-                CreatedAt = DateTime.UtcNow,
+                SentAt = DateTime.UtcNow,
                 IsRead = false
             };
             

@@ -19,6 +19,9 @@ public class Lesson
     
     public int? SubjectId { get; set; }
     public Subject? Subject { get; set; }
+
+    public int? LessonPackageId { get; set; }
+    public LessonPackage? LessonPackage { get; set; }
     
     public DateTime ScheduledDateTime { get; set; }
     public int DurationMinutes { get; set; } = 60;
