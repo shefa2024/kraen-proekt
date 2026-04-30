@@ -120,14 +120,46 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseDeveloperExceptionPage();
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "LearnConnect API V1");
+});
+
+app.MapGet("/api/debug/db", (ApplicationDbContext context, IConfiguration config) => 
+{
+    try 
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "LearnConnect API V1");
-    });
-}
+        var canConnect = context.Database.CanConnect();
+        var connStr = config.GetConnectionString("DefaultConnection") ?? Environment.GetEnvironmentVariable("DATABASE_URL") ?? "Not found";
+        // Mask password
+        if (connStr.Contains("Password", StringComparison.OrdinalIgnoreCase)) {
+            var parts = connStr.Split(';');
+            for (int i=0; i<parts.Length; i++) {
+                if (parts[i].TrimStart().StartsWith("Password", StringComparison.OrdinalIgnoreCase) || parts[i].TrimStart().StartsWith("Pwd", StringComparison.OrdinalIgnoreCase)) {
+                    parts[i] = "Password=***";
+                }
+            }
+            connStr = string.Join(";", parts);
+        }
+        
+        // Also mask URL password
+        if (connStr.StartsWith("postgres://")) {
+            var uri = new Uri(connStr);
+            var userInfo = uri.UserInfo.Split(':');
+            if (userInfo.Length > 1) {
+                connStr = connStr.Replace(userInfo[1], "***");
+            }
+        }
+        
+        return Results.Ok(new { CanConnect = canConnect, ConnectionString = connStr, Provider = context.Database.ProviderName });
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem(ex.ToString());
+    }
+});
 
 // app.UseCors
 app.UseCors("AllowAll");
