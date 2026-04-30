@@ -53,7 +53,13 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
 var parsedConnectionString = ""; // Store for debug
 
-if (!string.IsNullOrEmpty(databaseUrl))
+// If DATABASE_URL is not set but DefaultConnection contains a postgresql URL, use that
+if (string.IsNullOrEmpty(databaseUrl) && connectionString != null && connectionString.StartsWith("postgres", StringComparison.OrdinalIgnoreCase))
+{
+    databaseUrl = connectionString;
+}
+
+if (!string.IsNullOrEmpty(databaseUrl) && databaseUrl.StartsWith("postgres", StringComparison.OrdinalIgnoreCase))
 {
     // Normalize postgresql:// to postgres:// for Uri parsing
     var normalizedUrl = databaseUrl.Replace("postgresql://", "postgres://");
@@ -74,11 +80,11 @@ if (!string.IsNullOrEmpty(databaseUrl))
     connectionString = $"Host={host};Port={port};Database={database};Username={username};Password={password};SSL Mode={sslMode};{sslExtra}Timeout=30;Command Timeout=30;";
     parsedConnectionString = $"Host={host};Port={port};Database={database};Username={username};Password=***;SSL Mode={sslMode};{sslExtra}Timeout=30;Command Timeout=30;";
     
-    Console.WriteLine($"[DB] DATABASE_URL detected. Host={host}, Internal={isInternal}, SSL={sslMode}");
+    Console.WriteLine($"[DB] PostgreSQL URL detected. Host={host}, Internal={isInternal}, SSL={sslMode}");
 }
 else
 {
-    Console.WriteLine($"[DB] No DATABASE_URL found. Using DefaultConnection from appsettings.");
+    Console.WriteLine($"[DB] No PostgreSQL URL found. Using DefaultConnection as-is.");
     parsedConnectionString = connectionString ?? "Not configured";
 }
 
@@ -167,7 +173,7 @@ app.MapGet("/api/debug/db", (ApplicationDbContext context) =>
         return Results.Ok(new { 
             CanConnect = canConnect, 
             ParsedConnectionString = parsedConnectionString,
-            DatabaseUrlSet = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DATABASE_URL")),
+            OriginalUrl = databaseUrl,
             Provider = context.Database.ProviderName,
             Error = error
         });
@@ -238,6 +244,14 @@ using (var scope = app.Services.CreateScope())
         else
         {
             context.Database.Migrate();
+            
+            // Runtime seeder for Render if tables are empty
+            if (!context.Subjects.Any())
+            {
+                Console.WriteLine("[DB] Database is empty. Applying runtime seed data...");
+                DataSeeder.SeedData(context);
+                Console.WriteLine("[DB] Runtime seed data applied successfully.");
+            }
         }
     }
     catch (Exception ex)
