@@ -27,10 +27,22 @@ public class ReminderService : BackgroundService
                 // Check every hour
                 await Task.Delay(TimeSpan.FromHours(1), stoppingToken);
             }
+            catch (OperationCanceledException)
+            {
+                // Expected when application shuts down
+                break;
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error in Reminder Service");
-                await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken);
+                try 
+                {
+                    await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken);
+                }
+                catch (OperationCanceledException)
+                {
+                    break;
+                }
             }
         }
     }

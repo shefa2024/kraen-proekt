@@ -48,11 +48,21 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// Configure Database - Switched to PostgreSQL
+// Configure Database - Use SQL Server for local development, PostgreSQL for production
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        npgsqlOptions => npgsqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
+{
+    if (connectionString != null && (connectionString.Contains("localdb", StringComparison.OrdinalIgnoreCase) || connectionString.Contains("sqlexpress", StringComparison.OrdinalIgnoreCase)))
+    {
+        options.UseSqlServer(connectionString);
+    }
+    else
+    {
+        options.UseNpgsql(
+            connectionString,
+            npgsqlOptions => npgsqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
+    }
+});
 
 // Configure JWT Authentication
 var jwtSecret = builder.Configuration["Jwt:Secret"] ?? "YourSuperSecretKeyForJWTTokenGeneration12345!";
@@ -133,7 +143,43 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<ApplicationDbContext>();
-        context.Database.Migrate();
+        if (context.Database.IsSqlServer())
+        {
+            context.Database.EnsureCreated();
+            
+            // Apply automated fix for LessonPackages schema mismatch since we lack SQL Server migrations
+            try {
+                context.Database.ExecuteSqlRaw(@"
+                    IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'LessonPackages')
+                    BEGIN
+                        CREATE TABLE LessonPackages (
+                            Id INT PRIMARY KEY IDENTITY(1,1),
+                            StudentId INT NOT NULL,
+                            TeacherId INT NOT NULL,
+                            SubjectId INT NOT NULL,
+                            TotalLessons INT NOT NULL,
+                            RemainingLessons INT NOT NULL,
+                            TotalPrice DECIMAL(18,2) NOT NULL,
+                            Status INT NOT NULL,
+                            CreatedAt DATETIME2 NOT NULL DEFAULT GETUTCDATE(),
+                            CONSTRAINT FK_LessonPackages_Students FOREIGN KEY (StudentId) REFERENCES Students(Id) ON DELETE NO ACTION,
+                            CONSTRAINT FK_LessonPackages_Teachers FOREIGN KEY (TeacherId) REFERENCES Teachers(Id) ON DELETE NO ACTION,
+                            CONSTRAINT FK_LessonPackages_Subjects FOREIGN KEY (SubjectId) REFERENCES Subjects(Id) ON DELETE CASCADE
+                        );
+                    END
+                    
+                    IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('Lessons') AND name = 'LessonPackageId')
+                    BEGIN
+                        ALTER TABLE Lessons ADD LessonPackageId INT NULL;
+                        ALTER TABLE Lessons ADD CONSTRAINT FK_Lessons_LessonPackages FOREIGN KEY (LessonPackageId) REFERENCES LessonPackages(Id);
+                    END
+                ");
+            } catch (Exception) { /* Ignore if it fails */ }
+        }
+        else
+        {
+            context.Database.Migrate();
+        }
     }
     catch (Exception ex)
     {
