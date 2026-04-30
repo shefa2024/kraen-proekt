@@ -51,23 +51,47 @@ builder.Services.AddSwaggerGen(c =>
 // Configure Database - Use SQL Server for local development, PostgreSQL for production
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+var parsedConnectionString = ""; // Store for debug
 
 if (!string.IsNullOrEmpty(databaseUrl))
 {
-    var databaseUri = new Uri(databaseUrl);
+    // Normalize postgresql:// to postgres:// for Uri parsing
+    var normalizedUrl = databaseUrl.Replace("postgresql://", "postgres://");
+    var databaseUri = new Uri(normalizedUrl);
     var userInfo = databaseUri.UserInfo.Split(':');
+    var host = databaseUri.Host;
     var port = databaseUri.Port > 0 ? databaseUri.Port : 5432;
-    connectionString = $"Host={databaseUri.Host};Port={port};Database={databaseUri.LocalPath.TrimStart('/')};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true;";
+    var database = databaseUri.LocalPath.TrimStart('/');
+    var username = userInfo[0];
+    var password = userInfo.Length > 1 ? userInfo[1] : "";
+    
+    // Render internal URLs (dpg-xxx-a) do NOT support SSL
+    // Render external URLs (dpg-xxx-a.region-postgres.render.com) REQUIRE SSL
+    var isInternal = !host.Contains(".");
+    var sslMode = isInternal ? "Disable" : "Require";
+    var sslExtra = isInternal ? "" : "Trust Server Certificate=true;";
+    
+    connectionString = $"Host={host};Port={port};Database={database};Username={username};Password={password};SSL Mode={sslMode};{sslExtra}Timeout=30;Command Timeout=30;";
+    parsedConnectionString = $"Host={host};Port={port};Database={database};Username={username};Password=***;SSL Mode={sslMode};{sslExtra}Timeout=30;Command Timeout=30;";
+    
+    Console.WriteLine($"[DB] DATABASE_URL detected. Host={host}, Internal={isInternal}, SSL={sslMode}");
+}
+else
+{
+    Console.WriteLine($"[DB] No DATABASE_URL found. Using DefaultConnection from appsettings.");
+    parsedConnectionString = connectionString ?? "Not configured";
 }
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     if (connectionString != null && (connectionString.Contains("localdb", StringComparison.OrdinalIgnoreCase) || connectionString.Contains("sqlexpress", StringComparison.OrdinalIgnoreCase)))
     {
+        Console.WriteLine("[DB] Using SQL Server provider");
         options.UseSqlServer(connectionString);
     }
     else
     {
+        Console.WriteLine("[DB] Using PostgreSQL (Npgsql) provider");
         options.UseNpgsql(
             connectionString,
             npgsqlOptions => npgsqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
@@ -127,33 +151,26 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "LearnConnect API V1");
 });
 
-app.MapGet("/api/debug/db", (ApplicationDbContext context, IConfiguration config) => 
+app.MapGet("/api/debug/db", (ApplicationDbContext context) => 
 {
     try 
     {
-        var canConnect = context.Database.CanConnect();
-        var connStr = config.GetConnectionString("DefaultConnection") ?? Environment.GetEnvironmentVariable("DATABASE_URL") ?? "Not found";
-        // Mask password
-        if (connStr.Contains("Password", StringComparison.OrdinalIgnoreCase)) {
-            var parts = connStr.Split(';');
-            for (int i=0; i<parts.Length; i++) {
-                if (parts[i].TrimStart().StartsWith("Password", StringComparison.OrdinalIgnoreCase) || parts[i].TrimStart().StartsWith("Pwd", StringComparison.OrdinalIgnoreCase)) {
-                    parts[i] = "Password=***";
-                }
-            }
-            connStr = string.Join(";", parts);
+        var dbUrl = Environment.GetEnvironmentVariable("DATABASE_URL") ?? "Not set";
+        bool canConnect = false;
+        string error = "";
+        try {
+            canConnect = context.Database.CanConnect();
+        } catch (Exception connEx) {
+            error = connEx.Message;
         }
         
-        // Also mask URL password
-        if (connStr.StartsWith("postgres://")) {
-            var uri = new Uri(connStr);
-            var userInfo = uri.UserInfo.Split(':');
-            if (userInfo.Length > 1) {
-                connStr = connStr.Replace(userInfo[1], "***");
-            }
-        }
-        
-        return Results.Ok(new { CanConnect = canConnect, ConnectionString = connStr, Provider = context.Database.ProviderName });
+        return Results.Ok(new { 
+            CanConnect = canConnect, 
+            ParsedConnectionString = parsedConnectionString,
+            DatabaseUrlSet = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DATABASE_URL")),
+            Provider = context.Database.ProviderName,
+            Error = error
+        });
     }
     catch (Exception ex)
     {
