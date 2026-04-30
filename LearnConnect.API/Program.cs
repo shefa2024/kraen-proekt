@@ -57,7 +57,7 @@ if (!string.IsNullOrEmpty(databaseUrl))
     var databaseUri = new Uri(databaseUrl);
     var userInfo = databaseUri.UserInfo.Split(':');
     var port = databaseUri.Port > 0 ? databaseUri.Port : 5432;
-    connectionString = $"Host={databaseUri.Host};Port={port};Database={databaseUri.LocalPath.TrimStart('/')};Username={userInfo[0]};Password={userInfo[1]};Ssl Mode=Disable;";
+    connectionString = $"Host={databaseUri.Host};Port={port};Database={databaseUri.LocalPath.TrimStart('/')};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true;";
 }
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
