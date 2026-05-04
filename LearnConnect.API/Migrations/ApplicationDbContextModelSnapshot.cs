@@ -1546,397 +1546,397 @@ namespace LearnConnect.API.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 40, 771, DateTimeKind.Utc).AddTicks(7933),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 1, 934, DateTimeKind.Utc).AddTicks(6115),
                             Email = "admin@learnconnect.com",
                             FirstName = "Admin",
                             IsActive = true,
                             LastName = "User",
-                            PasswordHash = "$2a$11$P3KOsbHO9lX60zr6M.h5fuWXsDNcRZo.qDT7WHn3vejT88KOCQT46",
+                            PasswordHash = "$2a$11$NFxDUfE1eZFpUnRpj5Reb.6C8Af2zrzp8X6h67mYnIGPKLvrSGvQy",
                             Role = 2
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 40, 954, DateTimeKind.Utc).AddTicks(6697),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 2, 104, DateTimeKind.Utc).AddTicks(9400),
                             Email = "student@test.com",
                             FirstName = "Test",
                             IsActive = true,
                             LastName = "Student",
-                            PasswordHash = "$2a$11$lHFVw/F6m8Rg9NbMB2SUZ.LHafb3LxKGCwtlimUrLvMu30XQU3vC.",
+                            PasswordHash = "$2a$11$8UGdpXz/OVcSUa1QFBTXkudSn90D4IM.CofnXYnkPG70kV/RUGJdG",
                             Role = 0
                         },
                         new
                         {
                             Id = 50,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 41, 170, DateTimeKind.Utc).AddTicks(4545),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 2, 275, DateTimeKind.Utc).AddTicks(2695),
                             Email = "parent@test.com",
                             FirstName = "Test",
                             IsActive = true,
                             LastName = "Parent",
-                            PasswordHash = "$2a$11$QAYOCT5uSL.hgCrY.0Z7eOW1qODP3Xk7XNDyO3biyOVdL8xFAs97K",
+                            PasswordHash = "$2a$11$sdu92qHB371uXecuKU5U2uj3xXz21YNrq0eHcCJ7DVwtqtu/KbnQi",
                             Role = 3
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 41, 344, DateTimeKind.Utc).AddTicks(9745),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 2, 449, DateTimeKind.Utc).AddTicks(7914),
                             Email = "sarah.johnson@learnconnect.com",
                             FirstName = "Sarah",
                             IsActive = true,
                             LastName = "Johnson",
-                            PasswordHash = "$2a$11$cUDy0bdlJKrKI.aVFjY6S.Nxk9rzTN0Tx2brr2mRoFQ4zWQwHgXD6",
+                            PasswordHash = "$2a$11$L8QByiYxWXfm7SZMyK48xONLWhbWumZlmAHEZvvqed0hNWLKg8WNi",
                             Role = 1
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 41, 605, DateTimeKind.Utc).AddTicks(1027),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 2, 607, DateTimeKind.Utc).AddTicks(2382),
                             Email = "michael.chen@learnconnect.com",
                             FirstName = "Michael",
                             IsActive = true,
                             LastName = "Chen",
-                            PasswordHash = "$2a$11$.eHToypa.WvMFousaB815Ot4dz5NrMJM9/f4.ymhIPLWpogCspfK6",
+                            PasswordHash = "$2a$11$uK7RHyiuwlJnulMeL.Fa7u3TBasppNhM7krUNkxQdrr6ffyV9hCm6",
                             Role = 1
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 41, 824, DateTimeKind.Utc).AddTicks(8084),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 2, 797, DateTimeKind.Utc).AddTicks(7683),
                             Email = "emma.davis@learnconnect.com",
                             FirstName = "Emma",
                             IsActive = true,
                             LastName = "Davis",
-                            PasswordHash = "$2a$11$QlCqzeagga8K.Nxb.b/CFe49zlCg0426tjSBhKauTVmKmG0rSB1WO",
+                            PasswordHash = "$2a$11$66MS6/Mg2AO.s4PTGDujGuvrYtc4luyxFfnW4kuSz0wz3xXrVnhQq",
                             Role = 1
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 42, 69, DateTimeKind.Utc).AddTicks(6998),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 2, 999, DateTimeKind.Utc).AddTicks(8090),
                             Email = "david.martinez@learnconnect.com",
                             FirstName = "David",
                             IsActive = true,
                             LastName = "Martinez",
-                            PasswordHash = "$2a$11$5Cis8K4i8fZAOBsUilfwKuX4zQT6m9PiwoWsavzdenAr1Yo6kWdIO",
+                            PasswordHash = "$2a$11$MhnK.8FuEPxw9qduat3XnOFstpre/VO2H3YxBo0Vtz49llN/8O/mm",
                             Role = 1
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 42, 329, DateTimeKind.Utc).AddTicks(5734),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 3, 161, DateTimeKind.Utc).AddTicks(9785),
                             Email = "lisa.anderson@learnconnect.com",
                             FirstName = "Lisa",
                             IsActive = true,
                             LastName = "Anderson",
-                            PasswordHash = "$2a$11$f5Z6jjqGXYnS3GHDukv/COFYZwJFg1M/WmoXSIfzBu.QUKJidGKWO",
+                            PasswordHash = "$2a$11$o3KmTIf3l3P9IGYauwHJHO6aIpJLMrl38MFPTgDK03FsrMvJeSc1.",
                             Role = 1
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 42, 568, DateTimeKind.Utc).AddTicks(4300),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 3, 320, DateTimeKind.Utc).AddTicks(1208),
                             Email = "james.wilson@learnconnect.com",
                             FirstName = "James",
                             IsActive = true,
                             LastName = "Wilson",
-                            PasswordHash = "$2a$11$5H6/D.vNymtFa3AnvTm5AeFBj9rbLFjMB6lD2esJftYPkiTTH5EA2",
+                            PasswordHash = "$2a$11$aV7kSjKno8Oz1IVwVy5uUOM6UPh2ddG4ajyVWvBUsW/y3CiKa1hwu",
                             Role = 1
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 42, 798, DateTimeKind.Utc).AddTicks(7253),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 3, 482, DateTimeKind.Utc).AddTicks(6334),
                             Email = "sophia.garcia@learnconnect.com",
                             FirstName = "Sophia",
                             IsActive = true,
                             LastName = "Garcia",
-                            PasswordHash = "$2a$11$iZP.OsCW/MKWrPAflcHxBe8tNynmBI5zIVsLHKHL91A3dI1SVIvNu",
+                            PasswordHash = "$2a$11$DP5Gf2Wv7ljkYuJHCPGuk.CX.FYu1RfqkOWtVD9y1T8h47z57EEC6",
                             Role = 1
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 42, 993, DateTimeKind.Utc).AddTicks(3880),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 3, 674, DateTimeKind.Utc).AddTicks(2136),
                             Email = "robert.brown@learnconnect.com",
                             FirstName = "Robert",
                             IsActive = true,
                             LastName = "Brown",
-                            PasswordHash = "$2a$11$pkxg4aCD6uZ4bnj2HHOPfe8rto.SR7lDTeydCfQzQktd5omindbTa",
+                            PasswordHash = "$2a$11$hf2vG0X1XRoIjkzacyaBmuUimgR.8fmFj6teT3Vxwzwed7WrdYNei",
                             Role = 1
                         },
                         new
                         {
                             Id = 11,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 43, 248, DateTimeKind.Utc).AddTicks(7677),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 3, 861, DateTimeKind.Utc).AddTicks(2194),
                             Email = "olivia.taylor@learnconnect.com",
                             FirstName = "Olivia",
                             IsActive = true,
                             LastName = "Taylor",
-                            PasswordHash = "$2a$11$WlaTI8yrV5sY6gb9apPm2uTvkCCVxk4UHBbWZkljKN8WxueylV3Ha",
+                            PasswordHash = "$2a$11$2eb/GcG62tMrho.QEHnhru7GuHrpHMUk/LedNrv4sGRwjUSDQkeNK",
                             Role = 1
                         },
                         new
                         {
                             Id = 12,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 43, 429, DateTimeKind.Utc).AddTicks(3367),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 4, 40, DateTimeKind.Utc).AddTicks(6207),
                             Email = "daniel.moore@learnconnect.com",
                             FirstName = "Daniel",
                             IsActive = true,
                             LastName = "Moore",
-                            PasswordHash = "$2a$11$47VnIX2gEFEv7bHxhLQ2I.bWTPevA0ihnXQoYCWmbmZHxr22yqkEa",
+                            PasswordHash = "$2a$11$Tu/tIJUs.i.ySLODxR0ejuZ8JsXZG6qiV8rmvQ0g8Adh9pMTU2nEW",
                             Role = 1
                         },
                         new
                         {
                             Id = 20,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 43, 617, DateTimeKind.Utc).AddTicks(3534),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 4, 217, DateTimeKind.Utc).AddTicks(2079),
                             Email = "alice.walker@learnconnect.com",
                             FirstName = "Alice",
                             IsActive = true,
                             LastName = "Walker",
-                            PasswordHash = "$2a$11$srAeptjE3Wy3vUsmbgcyb.f49yJviZKGnXq7lpILWW/86m8LAjM2e",
+                            PasswordHash = "$2a$11$RWaZeyH9GjJYlEquA8xj4elDjOnyuAgeN/Pgg71BaccTWbajZw2JC",
                             Role = 1
                         },
                         new
                         {
                             Id = 21,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 43, 790, DateTimeKind.Utc).AddTicks(7335),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 4, 377, DateTimeKind.Utc).AddTicks(142),
                             Email = "robert.vance@learnconnect.com",
                             FirstName = "Robert",
                             IsActive = true,
                             LastName = "Vance",
-                            PasswordHash = "$2a$11$oUkrRtJnt.Z2sXSLYSP4A.1GkbpJbNzkXCLIYq.ZtkrJ1JiWoq4iC",
+                            PasswordHash = "$2a$11$g5Ja1lciDEAvY4Vl8T8enO0yKzU81PgExktagT1KVu2d48vddTcEO",
                             Role = 1
                         },
                         new
                         {
                             Id = 22,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 43, 966, DateTimeKind.Utc).AddTicks(962),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 4, 573, DateTimeKind.Utc).AddTicks(8164),
                             Email = "john.doe@learnconnect.com",
                             FirstName = "John",
                             IsActive = true,
                             LastName = "Doe",
-                            PasswordHash = "$2a$11$BEWa2bFpLPEV80tZrufj2uJknK51kLRaXNaj.qB/DB8MZm8l8GjGW",
+                            PasswordHash = "$2a$11$bYF2xaZLQ.aJlQQaoXuxNe70SNd5sfRfZaejf3oFOVKF6mt8APvh2",
                             Role = 1
                         },
                         new
                         {
                             Id = 23,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 44, 157, DateTimeKind.Utc).AddTicks(2950),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 4, 771, DateTimeKind.Utc).AddTicks(4629),
                             Email = "marie.curie@learnconnect.com",
                             FirstName = "Marie",
                             IsActive = true,
                             LastName = "Curie",
-                            PasswordHash = "$2a$11$OlQt7h3sZ4sXyRJ200SdkehqlioiMMOAtt.RdJ7CMJ9KiIjEnnnru",
+                            PasswordHash = "$2a$11$pY8pOY6G93RVXeh5.fqpiu7fSLx.AxRh449zFzmEk6moyf.qf2Yk6",
                             Role = 1
                         },
                         new
                         {
                             Id = 24,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 44, 338, DateTimeKind.Utc).AddTicks(3703),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 4, 946, DateTimeKind.Utc).AddTicks(7661),
                             Email = "walter.white@learnconnect.com",
                             FirstName = "Walter",
                             IsActive = true,
                             LastName = "White",
-                            PasswordHash = "$2a$11$YL9tHizEqf1XK79BeTRM1e85kk7zvjGAeFh5jU/2HANHfKsry.xfC",
+                            PasswordHash = "$2a$11$/rL6QzfGNzv0Ysw7Q5qiF.CjNsOdLD5E0ECjWe5NBy5iXfI.SPWlW",
                             Role = 1
                         },
                         new
                         {
                             Id = 25,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 44, 518, DateTimeKind.Utc).AddTicks(338),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 5, 154, DateTimeKind.Utc).AddTicks(2010),
                             Email = "heisenberg@learnconnect.com",
                             FirstName = "Werner",
                             IsActive = true,
                             LastName = "Heisenberg",
-                            PasswordHash = "$2a$11$3OXGEDCiAx8rZiXi/zbGLelF0ERu8O0uFismYTewyufBaLlKnoAqa",
+                            PasswordHash = "$2a$11$dq22.L6GqCRjAIz7HICpV.stymmSccWZZnN00Vqik.C3d7Gu1Fyj.",
                             Role = 1
                         },
                         new
                         {
                             Id = 26,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 44, 706, DateTimeKind.Utc).AddTicks(272),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 5, 319, DateTimeKind.Utc).AddTicks(7413),
                             Email = "jane.goodall@learnconnect.com",
                             FirstName = "Jane",
                             IsActive = true,
                             LastName = "Goodall",
-                            PasswordHash = "$2a$11$9tjo2F/CjgBfCPlErprAc.U9pdIa2/sjkwWr9nSxZFfO7q48assmG",
+                            PasswordHash = "$2a$11$IU1RqVqtC.WT2kCdq6YxsuW.12iep1lBQKO2/WntEVqpoDuYTf7.e",
                             Role = 1
                         },
                         new
                         {
                             Id = 27,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 44, 894, DateTimeKind.Utc).AddTicks(5927),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 5, 513, DateTimeKind.Utc).AddTicks(4481),
                             Email = "gregor.mendel@learnconnect.com",
                             FirstName = "Gregor",
                             IsActive = true,
                             LastName = "Mendel",
-                            PasswordHash = "$2a$11$ZE4inxZvjv8KkiXUUq2OSeo9XIwv0a.v4Wn7M0PJ2mRqCxvTbzhla",
+                            PasswordHash = "$2a$11$jZrv14KTMyFb1Oyuhcff5.BYmRIKXZHRpe9fVJyWoD/mrdo1q2fQS",
                             Role = 1
                         },
                         new
                         {
                             Id = 28,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 45, 246, DateTimeKind.Utc).AddTicks(9917),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 5, 676, DateTimeKind.Utc).AddTicks(8907),
                             Email = "new.grad@learnconnect.com",
                             FirstName = "Emily",
                             IsActive = true,
                             LastName = "Dickinson",
-                            PasswordHash = "$2a$11$4SqVmVxPppO6e89QjdAUTuVsBRdBFcf99KAhzCTAmOxcYNx99Dbne",
+                            PasswordHash = "$2a$11$vdMdIGj/GRUtJTgxXVvStehKcvfh6ZQFkh9fLFX82UO7aVwcN6T5W",
                             Role = 1
                         },
                         new
                         {
                             Id = 29,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 45, 456, DateTimeKind.Utc).AddTicks(3885),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 5, 868, DateTimeKind.Utc).AddTicks(1185),
                             Email = "shakespeare@learnconnect.com",
                             FirstName = "William",
                             IsActive = true,
                             LastName = "Shakespeare",
-                            PasswordHash = "$2a$11$fH/3x26UGR/4LlQrC2xX0e/B/D9fKpha5mGvGO5iAqPhqTYm5DPYC",
+                            PasswordHash = "$2a$11$MGLVLDR5R90GfR6Ge8yDmOUxHRXZ9EtdfQCvPuec2LPcFKZsOTb22",
                             Role = 1
                         },
                         new
                         {
                             Id = 30,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 45, 634, DateTimeKind.Utc).AddTicks(9884),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 6, 70, DateTimeKind.Utc).AddTicks(5029),
                             Email = "carlos.ruiz@learnconnect.com",
                             FirstName = "Carlos",
                             IsActive = true,
                             LastName = "Ruiz",
-                            PasswordHash = "$2a$11$5BxrVprTzivQmvVYAewgnOHdNh6MQ4mzTXY5C3NaPgEEl1XteoxN.",
+                            PasswordHash = "$2a$11$ZuSLTelyMurLyhyDIoAZxuMhBsdIYK.LEFcFBdaYJfpR//A8i4GU.",
                             Role = 1
                         },
                         new
                         {
                             Id = 31,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 45, 859, DateTimeKind.Utc).AddTicks(9240),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 6, 253, DateTimeKind.Utc).AddTicks(3693),
                             Email = "isabela.madrigal@learnconnect.com",
                             FirstName = "Isabela",
                             IsActive = true,
                             LastName = "Madrigal",
-                            PasswordHash = "$2a$11$gBC7FQsAl4gny7e18TCh1uYNDbo55dyFpg.jRAKjli0iy7GK4jO/e",
+                            PasswordHash = "$2a$11$UjRMw2B8eGRdzgVpVxNSwOr2T2tPdE.V3bfCU9kpWlt8/78vJZNfq",
                             Role = 1
                         },
                         new
                         {
                             Id = 32,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 46, 97, DateTimeKind.Utc).AddTicks(7236),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 6, 462, DateTimeKind.Utc).AddTicks(6117),
                             Email = "pierre.escargot@learnconnect.com",
                             FirstName = "Pierre",
                             IsActive = true,
                             LastName = "Escargot",
-                            PasswordHash = "$2a$11$gSabwkGPLM2YLA6BlYoeXeqb6qQh05ay6kVkPygyMAh8fIHvF7n7C",
+                            PasswordHash = "$2a$11$xZg.qYWLl5fwYb94osUepOtAqNTCO4kOZ6AgWSYA7uqcJdJcp2ovu",
                             Role = 1
                         },
                         new
                         {
                             Id = 33,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 46, 310, DateTimeKind.Utc).AddTicks(9487),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 6, 629, DateTimeKind.Utc).AddTicks(9706),
                             Email = "chef.gusteau@learnconnect.com",
                             FirstName = "Auguste",
                             IsActive = true,
                             LastName = "Gusteau",
-                            PasswordHash = "$2a$11$tsCc.WZ9d/AOm1cSykNLNeIGuOxEsytfJL7VhBAcmN2V66WZ7qWpW",
+                            PasswordHash = "$2a$11$1XeBIDOhwYDI77SL4Y6fZuypMTwqWnsH4MJKlN2CAchJ95Hzwc/Nq",
                             Role = 1
                         },
                         new
                         {
                             Id = 34,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 46, 520, DateTimeKind.Utc).AddTicks(2778),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 6, 844, DateTimeKind.Utc).AddTicks(6827),
                             Email = "script.kiddie@learnconnect.com",
                             FirstName = "Kevin",
                             IsActive = true,
                             LastName = "Mitnick",
-                            PasswordHash = "$2a$11$OxgZYVMxMHh0CsdmG7Ec0eJ42uQYNIKf9LJw4r5F92E.99BtUqJeC",
+                            PasswordHash = "$2a$11$BeXxxlxiXoVJYI3UzTHll.m/Z/hhT78rHn85jVUg3xjXFV/kP9Ceq",
                             Role = 1
                         },
                         new
                         {
                             Id = 35,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 46, 711, DateTimeKind.Utc).AddTicks(2470),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 7, 21, DateTimeKind.Utc).AddTicks(9565),
                             Email = "dev.ops@learnconnect.com",
                             FirstName = "Linus",
                             IsActive = true,
                             LastName = "Torvalds",
-                            PasswordHash = "$2a$11$1kh2GM9Rcx9WIN4hsVkh4ezMSCi8PX2bGcQ/sNZUWIZNWjx4zuVhq",
+                            PasswordHash = "$2a$11$F97oTGGM0SWAmv41gI5bKusc0M4ck/.C/FuzwSGM8POUsoiTz1bIq",
                             Role = 1
                         },
                         new
                         {
                             Id = 36,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 46, 890, DateTimeKind.Utc).AddTicks(3617),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 7, 197, DateTimeKind.Utc).AddTicks(8362),
                             Email = "ai.researcher@learnconnect.com",
                             FirstName = "Ada",
                             IsActive = true,
                             LastName = "Lovelace",
-                            PasswordHash = "$2a$11$KGHW4lERrgxXNzW4GmrJu.3.yaDHYtu99gqzcmbpJgUiCXlcMqT3u",
+                            PasswordHash = "$2a$11$g41WAc4vI2C0VuN5HkER6.ZWMRi58touQ3h6U6QOKHeCWkRGhAgBe",
                             Role = 1
                         },
                         new
                         {
                             Id = 37,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 47, 68, DateTimeKind.Utc).AddTicks(2267),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 7, 371, DateTimeKind.Utc).AddTicks(9527),
                             Email = "time.traveler@learnconnect.com",
                             FirstName = "Marty",
                             IsActive = true,
                             LastName = "McFly",
-                            PasswordHash = "$2a$11$jfjn7gxcur8fqB4BGy87rOckPd7NPTRCI0ILQ0Jf/PaDwX6aqiT62",
+                            PasswordHash = "$2a$11$xnZSH4R4HsphBEfnSRy7GusLcuH6eEYoqcbc.e.rFwy.MQ1MdhNLa",
                             Role = 1
                         },
                         new
                         {
                             Id = 38,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 47, 246, DateTimeKind.Utc).AddTicks(6931),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 7, 536, DateTimeKind.Utc).AddTicks(3245),
                             Email = "museum.guide@learnconnect.com",
                             FirstName = "Indiana",
                             IsActive = true,
                             LastName = "Jones",
-                            PasswordHash = "$2a$11$ZBX/LJdEBbjZdUiaxpoY3OdzobkPLWF7BLa.djOHixbvRxpHGTCjm",
+                            PasswordHash = "$2a$11$WrN3sai/yV0kUCMplfw9euBLLMZ0Iq2C2xVECQJdCDRO4hsmoQutW",
                             Role = 1
                         },
                         new
                         {
                             Id = 39,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 47, 523, DateTimeKind.Utc).AddTicks(2455),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 7, 701, DateTimeKind.Utc).AddTicks(5957),
                             Email = "book.worm@learnconnect.com",
                             FirstName = "Hermione",
                             IsActive = true,
                             LastName = "Granger",
-                            PasswordHash = "$2a$11$mBghj0CG2.xjOQJQ8pLoIec0HYeuX13h8LRuDDcuqT45QH6wl.XpG",
+                            PasswordHash = "$2a$11$wxq622IQ8qv3OzImy1rDLO.9dkeiRmAxa6TpF9VWjNvZLKEHnzjYm",
                             Role = 1
                         },
                         new
                         {
                             Id = 40,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 47, 739, DateTimeKind.Utc).AddTicks(7407),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 7, 907, DateTimeKind.Utc).AddTicks(1317),
                             Email = "published.author@learnconnect.com",
                             FirstName = "J.K.",
                             IsActive = true,
                             LastName = "Rowling",
-                            PasswordHash = "$2a$11$y.wGiTiEe7ixgWTIWqOfGu3yWNtLyQi2jO4hcOrJ1akhMCHStJzvm",
+                            PasswordHash = "$2a$11$Lfcpwm793tvO4v9EgbCsrOoZmd1rqnEX9/DM7gQxMi444UpeF14Pm",
                             Role = 1
                         },
                         new
                         {
                             Id = 41,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 47, 959, DateTimeKind.Utc).AddTicks(2082),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 8, 152, DateTimeKind.Utc).AddTicks(3643),
                             Email = "street.performer@learnconnect.com",
                             FirstName = "Ed",
                             IsActive = true,
                             LastName = "Sheeran",
-                            PasswordHash = "$2a$11$NBhabJ5rlaeWpFM3zw2sMejGpc4GpND8K0LXLxFyLTrXUulJPaPZ6",
+                            PasswordHash = "$2a$11$E52icxQWgHx8qgrCONfdUOjXjU.9z5IBrVbiwcoww0BBY90odvUYa",
                             Role = 1
                         },
                         new
                         {
                             Id = 42,
-                            CreatedAt = new DateTime(2026, 4, 27, 6, 16, 48, 200, DateTimeKind.Utc).AddTicks(9),
+                            CreatedAt = new DateTime(2026, 5, 4, 9, 41, 8, 345, DateTimeKind.Utc).AddTicks(3957),
                             Email = "concert.pianist@learnconnect.com",
                             FirstName = "Ludwig",
                             IsActive = true,
                             LastName = "Beethoven",
-                            PasswordHash = "$2a$11$/jR9MOZdQrBm3lQc6ZbYmO4ue5M.pyff9Y1s82samvdwnjs1wFKG2",
+                            PasswordHash = "$2a$11$UWxLZ4qquj7MMs9JcKDIyerf.1c7BAOcZk3R/7qP3L1V0tXlR53vu",
                             Role = 1
                         });
                 });
