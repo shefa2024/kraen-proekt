@@ -201,63 +201,85 @@ app.MapHub<LearnConnect.API.Hubs.WhiteboardHub>("/hubs/whiteboard");
 app.MapHub<LearnConnect.API.Hubs.NotebookHub>("/hubs/notebook");
 app.MapHub<LearnConnect.API.Hubs.VideoCallHub>("/hubs/videocall");
 
-// Initialize database
+// Initialize database with retry for Render cold starts
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    try
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    const int maxRetries = 5;
+    
+    for (int attempt = 1; attempt <= maxRetries; attempt++)
     {
-        var context = services.GetRequiredService<ApplicationDbContext>();
-        if (context.Database.IsSqlServer())
+        try
         {
-            context.Database.EnsureCreated();
+            var context = services.GetRequiredService<ApplicationDbContext>();
             
-            // Apply automated fix for LessonPackages schema mismatch since we lack SQL Server migrations
-            try {
-                context.Database.ExecuteSqlRaw(@"
-                    IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'LessonPackages')
-                    BEGIN
-                        CREATE TABLE LessonPackages (
-                            Id INT PRIMARY KEY IDENTITY(1,1),
-                            StudentId INT NOT NULL,
-                            TeacherId INT NOT NULL,
-                            SubjectId INT NOT NULL,
-                            TotalLessons INT NOT NULL,
-                            RemainingLessons INT NOT NULL,
-                            TotalPrice DECIMAL(18,2) NOT NULL,
-                            Status INT NOT NULL,
-                            CreatedAt DATETIME2 NOT NULL DEFAULT GETUTCDATE(),
-                            CONSTRAINT FK_LessonPackages_Students FOREIGN KEY (StudentId) REFERENCES Students(Id) ON DELETE NO ACTION,
-                            CONSTRAINT FK_LessonPackages_Teachers FOREIGN KEY (TeacherId) REFERENCES Teachers(Id) ON DELETE NO ACTION,
-                            CONSTRAINT FK_LessonPackages_Subjects FOREIGN KEY (SubjectId) REFERENCES Subjects(Id) ON DELETE CASCADE
-                        );
-                    END
-                    
-                    IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('Lessons') AND name = 'LessonPackageId')
-                    BEGIN
-                        ALTER TABLE Lessons ADD LessonPackageId INT NULL;
-                        ALTER TABLE Lessons ADD CONSTRAINT FK_Lessons_LessonPackages FOREIGN KEY (LessonPackageId) REFERENCES LessonPackages(Id);
-                    END
-                ");
-            } catch (Exception) { /* Ignore if it fails */ }
-        }
-        else
-        {
-            context.Database.Migrate();
-            
-            // Runtime seeder for Render if tables are empty
-            if (!context.Subjects.Any())
+            if (context.Database.IsSqlServer())
             {
-                Console.WriteLine("[DB] Database is empty. Applying runtime seed data...");
-                DataSeeder.SeedData(context);
-                Console.WriteLine("[DB] Runtime seed data applied successfully.");
+                logger.LogInformation("[DB] Using SQL Server – calling EnsureCreated");
+                context.Database.EnsureCreated();
+                
+                // Apply automated fix for LessonPackages schema mismatch since we lack SQL Server migrations
+                try {
+                    context.Database.ExecuteSqlRaw(@"
+                        IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'LessonPackages')
+                        BEGIN
+                            CREATE TABLE LessonPackages (
+                                Id INT PRIMARY KEY IDENTITY(1,1),
+                                StudentId INT NOT NULL,
+                                TeacherId INT NOT NULL,
+                                SubjectId INT NOT NULL,
+                                TotalLessons INT NOT NULL,
+                                RemainingLessons INT NOT NULL,
+                                TotalPrice DECIMAL(18,2) NOT NULL,
+                                Status INT NOT NULL,
+                                CreatedAt DATETIME2 NOT NULL DEFAULT GETUTCDATE(),
+                                CONSTRAINT FK_LessonPackages_Students FOREIGN KEY (StudentId) REFERENCES Students(Id) ON DELETE NO ACTION,
+                                CONSTRAINT FK_LessonPackages_Teachers FOREIGN KEY (TeacherId) REFERENCES Teachers(Id) ON DELETE NO ACTION,
+                                CONSTRAINT FK_LessonPackages_Subjects FOREIGN KEY (SubjectId) REFERENCES Subjects(Id) ON DELETE CASCADE
+                            );
+                        END
+                        
+                        IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('Lessons') AND name = 'LessonPackageId')
+                        BEGIN
+                            ALTER TABLE Lessons ADD LessonPackageId INT NULL;
+                            ALTER TABLE Lessons ADD CONSTRAINT FK_Lessons_LessonPackages FOREIGN KEY (LessonPackageId) REFERENCES LessonPackages(Id);
+                        END
+                    ");
+                } catch (Exception) { /* Ignore if it fails */ }
             }
+            else
+            {
+                logger.LogInformation("[DB] Using PostgreSQL – running Migrate() (attempt {Attempt}/{Max})", attempt, maxRetries);
+                context.Database.Migrate();
+                logger.LogInformation("[DB] Migration complete.");
+                
+                // Runtime seeder for Render if tables are empty
+                if (!context.Subjects.Any())
+                {
+                    logger.LogInformation("[DB] Database is empty. Applying runtime seed data...");
+                    DataSeeder.SeedData(context);
+                    logger.LogInformation("[DB] Runtime seed data applied successfully.");
+                }
+                else
+                {
+                    logger.LogInformation("[DB] Database already has data – skipping seed.");
+                }
+            }
+            
+            break; // Success – exit retry loop
         }
-    }
-    catch (Exception ex)
-    {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred migrating the DB.");
+        catch (Exception ex) when (attempt < maxRetries)
+        {
+            var logger2 = services.GetRequiredService<ILogger<Program>>();
+            logger2.LogWarning(ex, "[DB] Attempt {Attempt}/{Max} failed. Retrying in 3 seconds...", attempt, maxRetries);
+            Thread.Sleep(3000);
+        }
+        catch (Exception ex)
+        {
+            var logger2 = services.GetRequiredService<ILogger<Program>>();
+            logger2.LogError(ex, "[DB] All {Max} migration attempts failed. App will start but DB may be unavailable.", maxRetries);
+        }
     }
 }
 

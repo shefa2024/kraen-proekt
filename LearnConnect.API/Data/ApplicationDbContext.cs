@@ -219,11 +219,12 @@ public class ApplicationDbContext : DbContext
                 .OnDelete(DeleteBehavior.Restrict);
         });
 
-        // Seed initial data
-        SeedData(modelBuilder);
     }
 
-    private void SeedData(ModelBuilder modelBuilder)
+    // NOTE: Seed data is handled by the InitialPostgres migration (baked-in) and
+    // by DataSeeder.cs at runtime for fresh databases. Do NOT call HasData() with
+    // DateTime.UtcNow here — it causes EF Core to perpetually detect model changes.
+    private void SeedData_DISABLED(ModelBuilder modelBuilder)
     {
         // Seed Subjects
         modelBuilder.Entity<Subject>().HasData(
@@ -318,10 +319,10 @@ public class ApplicationDbContext : DbContext
                 Languages = "English,Spanish",
                 AverageRating = 4.8,
                 TotalLessons = 250,
-                MemberSince = new DateTime(2020, 1, 15),
+                MemberSince = new DateTime(2020, 1, 15, 0, 0, 0, DateTimeKind.Utc),
                 ResponseTime = "Within 2 hours",
                 VerificationStatus = TeacherVerificationStatus.Verified,
-                VerifiedAt = new DateTime(2020, 1, 20)
+                VerifiedAt = new DateTime(2020, 1, 20, 0, 0, 0, DateTimeKind.Utc)
             },
             new Teacher
             {
@@ -336,10 +337,10 @@ public class ApplicationDbContext : DbContext
                 Languages = "English,Mandarin",
                 AverageRating = 4.9,
                 TotalLessons = 180,
-                MemberSince = new DateTime(2021, 3, 20),
+                MemberSince = new DateTime(2021, 3, 20, 0, 0, 0, DateTimeKind.Utc),
                 ResponseTime = "Within 1 hour",
                 VerificationStatus = TeacherVerificationStatus.Verified,
-                VerifiedAt = new DateTime(2021, 3, 25)
+                VerifiedAt = new DateTime(2021, 3, 25, 0, 0, 0, DateTimeKind.Utc)
             },
             new Teacher
             {
@@ -354,10 +355,10 @@ public class ApplicationDbContext : DbContext
                 Languages = "English,French",
                 AverageRating = 4.7,
                 TotalLessons = 320,
-                MemberSince = new DateTime(2019, 6, 10),
+                MemberSince = new DateTime(2019, 6, 10, 0, 0, 0, DateTimeKind.Utc),
                 ResponseTime = "Within 3 hours",
                 VerificationStatus = TeacherVerificationStatus.Verified,
-                VerifiedAt = new DateTime(2019, 6, 15)
+                VerifiedAt = new DateTime(2019, 6, 15, 0, 0, 0, DateTimeKind.Utc)
             },
             new Teacher
             {
@@ -372,10 +373,10 @@ public class ApplicationDbContext : DbContext
                 Languages = "English,Spanish,Portuguese",
                 AverageRating = 4.9,
                 TotalLessons = 290,
-                MemberSince = new DateTime(2018, 9, 5),
+                MemberSince = new DateTime(2018, 9, 5, 0, 0, 0, DateTimeKind.Utc),
                 ResponseTime = "Within 2 hours",
                 VerificationStatus = TeacherVerificationStatus.Verified,
-                VerifiedAt = new DateTime(2018, 9, 10)
+                VerifiedAt = new DateTime(2018, 9, 10, 0, 0, 0, DateTimeKind.Utc)
             },
             new Teacher
             {
@@ -390,10 +391,10 @@ public class ApplicationDbContext : DbContext
                 Languages = "English,German,Italian",
                 AverageRating = 5.0,
                 TotalLessons = 450,
-                MemberSince = new DateTime(2017, 2, 14),
+                MemberSince = new DateTime(2017, 2, 14, 0, 0, 0, DateTimeKind.Utc),
                 ResponseTime = "Within 4 hours",
                 VerificationStatus = TeacherVerificationStatus.Verified,
-                VerifiedAt = new DateTime(2017, 2, 20)
+                VerifiedAt = new DateTime(2017, 2, 20, 0, 0, 0, DateTimeKind.Utc)
             },
             new Teacher
             {
@@ -408,10 +409,10 @@ public class ApplicationDbContext : DbContext
                 Languages = "English,French",
                 AverageRating = 4.6,
                 TotalLessons = 210,
-                MemberSince = new DateTime(2020, 5, 22),
+                MemberSince = new DateTime(2020, 5, 22, 0, 0, 0, DateTimeKind.Utc),
                 ResponseTime = "Within 2 hours",
                 VerificationStatus = TeacherVerificationStatus.Verified,
-                VerifiedAt = new DateTime(2020, 5, 28)
+                VerifiedAt = new DateTime(2020, 5, 28, 0, 0, 0, DateTimeKind.Utc)
             },
             new Teacher
             {
@@ -426,10 +427,10 @@ public class ApplicationDbContext : DbContext
                 Languages = "Spanish,English,Catalan",
                 AverageRating = 4.8,
                 TotalLessons = 380,
-                MemberSince = new DateTime(2021, 8, 30),
+                MemberSince = new DateTime(2021, 8, 30, 0, 0, 0, DateTimeKind.Utc),
                 ResponseTime = "Within 1 hour",
                 VerificationStatus = TeacherVerificationStatus.Verified,
-                VerifiedAt = new DateTime(2021, 9, 5)
+                VerifiedAt = new DateTime(2021, 9, 5, 0, 0, 0, DateTimeKind.Utc)
             },
             new Teacher
             {
@@ -444,10 +445,10 @@ public class ApplicationDbContext : DbContext
                 Languages = "English",
                 AverageRating = 4.7,
                 TotalLessons = 340,
-                MemberSince = new DateTime(2016, 11, 8),
+                MemberSince = new DateTime(2016, 11, 8, 0, 0, 0, DateTimeKind.Utc),
                 ResponseTime = "Within 5 hours",
                 VerificationStatus = TeacherVerificationStatus.Verified,
-                VerifiedAt = new DateTime(2016, 11, 15)
+                VerifiedAt = new DateTime(2016, 11, 15, 0, 0, 0, DateTimeKind.Utc)
             },
             new Teacher
             {
@@ -462,10 +463,10 @@ public class ApplicationDbContext : DbContext
                 Languages = "English,French",
                 AverageRating = 4.9,
                 TotalLessons = 195,
-                MemberSince = new DateTime(2021, 1, 12),
+                MemberSince = new DateTime(2021, 1, 12, 0, 0, 0, DateTimeKind.Utc),
                 ResponseTime = "Within 3 hours",
                 VerificationStatus = TeacherVerificationStatus.Verified,
-                VerifiedAt = new DateTime(2021, 1, 18)
+                VerifiedAt = new DateTime(2021, 1, 18, 0, 0, 0, DateTimeKind.Utc)
             },
             new Teacher
             {
@@ -480,10 +481,10 @@ public class ApplicationDbContext : DbContext
                 Languages = "French,English,Spanish",
                 AverageRating = 4.8,
                 TotalLessons = 420,
-                MemberSince = new DateTime(2019, 4, 25),
+                MemberSince = new DateTime(2019, 4, 25, 0, 0, 0, DateTimeKind.Utc),
                 ResponseTime = "Within 2 hours",
                 VerificationStatus = TeacherVerificationStatus.Verified,
-                VerifiedAt = new DateTime(2019, 4, 30)
+                VerifiedAt = new DateTime(2019, 4, 30, 0, 0, 0, DateTimeKind.Utc)
             }
         );
 
@@ -565,29 +566,29 @@ public class ApplicationDbContext : DbContext
 
         // Add new Teacher profiles
         modelBuilder.Entity<Teacher>().HasData(
-            new Teacher { Id = 20, UserId = 20, Bio = "Math enthusiast helping students love numbers.", HourlyRate = 25.00m, Location = "Online", Education = "BS Math", YearsOfExperience = 2, Languages = "English", AverageRating = 4.5, TotalLessons = 50, MemberSince = new DateTime(2023, 8, 1), ResponseTime = "Within 1 hour", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2023, 8, 5) },
-            new Teacher { Id = 21, UserId = 21, Bio = "Advanced mathematics for serious students.", HourlyRate = 75.00m, Location = "New York", Education = "PhD Math", YearsOfExperience = 20, Languages = "English", AverageRating = 5.0, TotalLessons = 500, MemberSince = new DateTime(2021, 1, 1), ResponseTime = "Within 12 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2021, 1, 10) },
-            new Teacher { Id = 22, UserId = 22, Bio = "Physics made simple and fun.", HourlyRate = 28.00m, Location = "Online", Education = "BS Physics", YearsOfExperience = 3, Languages = "English", AverageRating = 4.6, TotalLessons = 80, MemberSince = new DateTime(2023, 6, 1), ResponseTime = "Within 2 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2023, 6, 8) },
-            new Teacher { Id = 23, UserId = 23, Bio = "Expert physics tutoring for university level.", HourlyRate = 70.00m, Location = "Paris", Education = "PhD Physics", YearsOfExperience = 15, Languages = "English,French", AverageRating = 4.9, TotalLessons = 300, MemberSince = new DateTime(2023, 1, 1), ResponseTime = "Within 6 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2023, 1, 10) },
-            new Teacher { Id = 24, UserId = 24, Bio = "High school chemistry support.", HourlyRate = 30.00m, Location = "Online", Education = "BS Chemistry", YearsOfExperience = 4, Languages = "English", AverageRating = 4.7, TotalLessons = 120, MemberSince = new DateTime(2024, 1, 1), ResponseTime = "Within 3 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2024, 1, 8) },
-            new Teacher { Id = 25, UserId = 25, Bio = "Advanced organic chemistry and lab prep.", HourlyRate = 80.00m, Location = "Berlin", Education = "PhD Chemistry", YearsOfExperience = 25, Languages = "English,German", AverageRating = 5.0, TotalLessons = 600, MemberSince = new DateTime(2020, 1, 1), ResponseTime = "Within 24 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2020, 1, 15) },
-            new Teacher { Id = 26, UserId = 26, Bio = "Biology basics for everyone.", HourlyRate = 22.00m, Location = "Online", Education = "BS Biology", YearsOfExperience = 1, Languages = "English", AverageRating = 4.4, TotalLessons = 30, MemberSince = new DateTime(2024, 3, 1), ResponseTime = "Within 1 hour", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2024, 3, 5) },
-            new Teacher { Id = 27, UserId = 27, Bio = "Genetics and evolutionary biology expert.", HourlyRate = 45.00m, Location = "Vienna", Education = "MS Biology", YearsOfExperience = 8, Languages = "English,German", AverageRating = 4.8, TotalLessons = 200, MemberSince = new DateTime(2022, 1, 1), ResponseTime = "Within 4 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2022, 1, 10) },
-            new Teacher { Id = 28, UserId = 28, Bio = "English conversation and grammar.", HourlyRate = 20.00m, Location = "Online", Education = "BA English", YearsOfExperience = 1, Languages = "English", AverageRating = 4.3, TotalLessons = 40, MemberSince = new DateTime(2024, 2, 1), ResponseTime = "Within 1 hour", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2024, 2, 8) },
-            new Teacher { Id = 29, UserId = 29, Bio = "Literature analysis and creative writing.", HourlyRate = 65.00m, Location = "London", Education = "MFA Writing", YearsOfExperience = 12, Languages = "English", AverageRating = 4.9, TotalLessons = 350, MemberSince = new DateTime(2022, 1, 1), ResponseTime = "Within 5 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2022, 1, 12) },
-            new Teacher { Id = 30, UserId = 30, Bio = "Spanish for travel and business.", HourlyRate = 40.00m, Location = "Barcelona", Education = "BA Spanish", YearsOfExperience = 6, Languages = "Spanish,English", AverageRating = 4.7, TotalLessons = 150, MemberSince = new DateTime(2022, 1, 1), ResponseTime = "Within 2 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2022, 1, 15) },
-            new Teacher { Id = 31, UserId = 31, Bio = "Native Spanish speaker, advanced levels.", HourlyRate = 60.00m, Location = "Madrid", Education = "MA Linguistics", YearsOfExperience = 10, Languages = "Spanish,English", AverageRating = 4.9, TotalLessons = 280, MemberSince = new DateTime(2023, 1, 1), ResponseTime = "Within 3 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2023, 1, 10) },
-            new Teacher { Id = 32, UserId = 32, Bio = "Learn French basics quickly.", HourlyRate = 25.00m, Location = "Online", Education = "BA French", YearsOfExperience = 2, Languages = "French,English", AverageRating = 4.5, TotalLessons = 60, MemberSince = new DateTime(2023, 7, 1), ResponseTime = "Within 1 hour", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2023, 7, 8) },
-            new Teacher { Id = 33, UserId = 33, Bio = "Master French cuisine and language.", HourlyRate = 70.00m, Location = "Paris", Education = "Culinary Arts", YearsOfExperience = 15, Languages = "French,English", AverageRating = 5.0, TotalLessons = 400, MemberSince = new DateTime(2021, 1, 1), ResponseTime = "Within 8 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2021, 1, 12) },
-            new Teacher { Id = 34, UserId = 34, Bio = "Intro to coding and cybersecurity.", HourlyRate = 25.00m, Location = "Online", Education = "Self-taught", YearsOfExperience = 3, Languages = "English", AverageRating = 4.6, TotalLessons = 90, MemberSince = new DateTime(2024, 1, 1), ResponseTime = "Within 2 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2024, 1, 10) },
-            new Teacher { Id = 35, UserId = 35, Bio = "DevOps, Linux, and System Admin.", HourlyRate = 55.00m, Location = "Helsinki", Education = "MS CS", YearsOfExperience = 10, Languages = "English,Finnish", AverageRating = 4.8, TotalLessons = 220, MemberSince = new DateTime(2023, 1, 1), ResponseTime = "Within 4 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2023, 1, 15) },
-            new Teacher { Id = 36, UserId = 36, Bio = "Artificial Intelligence and Machine Learning.", HourlyRate = 90.00m, Location = "San Francisco", Education = "PhD CS", YearsOfExperience = 12, Languages = "English", AverageRating = 5.0, TotalLessons = 180, MemberSince = new DateTime(2022, 1, 1), ResponseTime = "Within 12 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2022, 1, 18) },
-            new Teacher { Id = 37, UserId = 37, Bio = "History through the ages.", HourlyRate = 20.00m, Location = "Online", Education = "BA History", YearsOfExperience = 2, Languages = "English", AverageRating = 4.4, TotalLessons = 45, MemberSince = new DateTime(2023, 9, 1), ResponseTime = "Within 1 hour", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2023, 9, 5) },
-            new Teacher { Id = 38, UserId = 38, Bio = "Archaeology and ancient civilizations.", HourlyRate = 40.00m, Location = "Cairo", Education = "PhD Archaeology", YearsOfExperience = 15, Languages = "English", AverageRating = 4.8, TotalLessons = 300, MemberSince = new DateTime(2022, 1, 1), ResponseTime = "Within 6 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2022, 1, 20) },
-            new Teacher { Id = 39, UserId = 39, Bio = "Reading comprehension and book clubs.", HourlyRate = 22.00m, Location = "Online", Education = "BA Lit", YearsOfExperience = 3, Languages = "English", AverageRating = 4.7, TotalLessons = 100, MemberSince = new DateTime(2024, 1, 1), ResponseTime = "Within 2 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2024, 1, 8) },
-            new Teacher { Id = 40, UserId = 40, Bio = "Creative writing masterclass.", HourlyRate = 65.00m, Location = "Edinburgh", Education = "BA Classics", YearsOfExperience = 20, Languages = "English", AverageRating = 4.9, TotalLessons = 500, MemberSince = new DateTime(2020, 1, 1), ResponseTime = "Within 24 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2020, 1, 15) },
-            new Teacher { Id = 41, UserId = 41, Bio = "Guitar and pop music basics.", HourlyRate = 25.00m, Location = "London", Education = "Self-taught", YearsOfExperience = 5, Languages = "English", AverageRating = 4.8, TotalLessons = 150, MemberSince = new DateTime(2022, 1, 1), ResponseTime = "Within 2 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2022, 1, 12) },
-            new Teacher { Id = 42, UserId = 42, Bio = "Classical piano and composition.", HourlyRate = 85.00m, Location = "Vienna", Education = "Conservatory", YearsOfExperience = 30, Languages = "German,English", AverageRating = 5.0, TotalLessons = 800, MemberSince = new DateTime(2018, 1, 1), ResponseTime = "Within 12 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2018, 1, 20) }
+            new Teacher { Id = 20, UserId = 20, Bio = "Math enthusiast helping students love numbers.", HourlyRate = 25.00m, Location = "Online", Education = "BS Math", YearsOfExperience = 2, Languages = "English", AverageRating = 4.5, TotalLessons = 50, MemberSince = new DateTime(2023, 8, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 1 hour", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2023, 8, 5, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 21, UserId = 21, Bio = "Advanced mathematics for serious students.", HourlyRate = 75.00m, Location = "New York", Education = "PhD Math", YearsOfExperience = 20, Languages = "English", AverageRating = 5.0, TotalLessons = 500, MemberSince = new DateTime(2021, 1, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 12 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2021, 1, 10, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 22, UserId = 22, Bio = "Physics made simple and fun.", HourlyRate = 28.00m, Location = "Online", Education = "BS Physics", YearsOfExperience = 3, Languages = "English", AverageRating = 4.6, TotalLessons = 80, MemberSince = new DateTime(2023, 6, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 2 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2023, 6, 8, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 23, UserId = 23, Bio = "Expert physics tutoring for university level.", HourlyRate = 70.00m, Location = "Paris", Education = "PhD Physics", YearsOfExperience = 15, Languages = "English,French", AverageRating = 4.9, TotalLessons = 300, MemberSince = new DateTime(2023, 1, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 6 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2023, 1, 10, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 24, UserId = 24, Bio = "High school chemistry support.", HourlyRate = 30.00m, Location = "Online", Education = "BS Chemistry", YearsOfExperience = 4, Languages = "English", AverageRating = 4.7, TotalLessons = 120, MemberSince = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 3 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2024, 1, 8, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 25, UserId = 25, Bio = "Advanced organic chemistry and lab prep.", HourlyRate = 80.00m, Location = "Berlin", Education = "PhD Chemistry", YearsOfExperience = 25, Languages = "English,German", AverageRating = 5.0, TotalLessons = 600, MemberSince = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 24 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2020, 1, 15, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 26, UserId = 26, Bio = "Biology basics for everyone.", HourlyRate = 22.00m, Location = "Online", Education = "BS Biology", YearsOfExperience = 1, Languages = "English", AverageRating = 4.4, TotalLessons = 30, MemberSince = new DateTime(2024, 3, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 1 hour", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2024, 3, 5, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 27, UserId = 27, Bio = "Genetics and evolutionary biology expert.", HourlyRate = 45.00m, Location = "Vienna", Education = "MS Biology", YearsOfExperience = 8, Languages = "English,German", AverageRating = 4.8, TotalLessons = 200, MemberSince = new DateTime(2022, 1, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 4 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2022, 1, 10, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 28, UserId = 28, Bio = "English conversation and grammar.", HourlyRate = 20.00m, Location = "Online", Education = "BA English", YearsOfExperience = 1, Languages = "English", AverageRating = 4.3, TotalLessons = 40, MemberSince = new DateTime(2024, 2, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 1 hour", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2024, 2, 8, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 29, UserId = 29, Bio = "Literature analysis and creative writing.", HourlyRate = 65.00m, Location = "London", Education = "MFA Writing", YearsOfExperience = 12, Languages = "English", AverageRating = 4.9, TotalLessons = 350, MemberSince = new DateTime(2022, 1, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 5 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2022, 1, 12, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 30, UserId = 30, Bio = "Spanish for travel and business.", HourlyRate = 40.00m, Location = "Barcelona", Education = "BA Spanish", YearsOfExperience = 6, Languages = "Spanish,English", AverageRating = 4.7, TotalLessons = 150, MemberSince = new DateTime(2022, 1, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 2 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2022, 1, 15, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 31, UserId = 31, Bio = "Native Spanish speaker, advanced levels.", HourlyRate = 60.00m, Location = "Madrid", Education = "MA Linguistics", YearsOfExperience = 10, Languages = "Spanish,English", AverageRating = 4.9, TotalLessons = 280, MemberSince = new DateTime(2023, 1, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 3 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2023, 1, 10, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 32, UserId = 32, Bio = "Learn French basics quickly.", HourlyRate = 25.00m, Location = "Online", Education = "BA French", YearsOfExperience = 2, Languages = "French,English", AverageRating = 4.5, TotalLessons = 60, MemberSince = new DateTime(2023, 7, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 1 hour", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2023, 7, 8, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 33, UserId = 33, Bio = "Master French cuisine and language.", HourlyRate = 70.00m, Location = "Paris", Education = "Culinary Arts", YearsOfExperience = 15, Languages = "French,English", AverageRating = 5.0, TotalLessons = 400, MemberSince = new DateTime(2021, 1, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 8 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2021, 1, 12, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 34, UserId = 34, Bio = "Intro to coding and cybersecurity.", HourlyRate = 25.00m, Location = "Online", Education = "Self-taught", YearsOfExperience = 3, Languages = "English", AverageRating = 4.6, TotalLessons = 90, MemberSince = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 2 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2024, 1, 10, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 35, UserId = 35, Bio = "DevOps, Linux, and System Admin.", HourlyRate = 55.00m, Location = "Helsinki", Education = "MS CS", YearsOfExperience = 10, Languages = "English,Finnish", AverageRating = 4.8, TotalLessons = 220, MemberSince = new DateTime(2023, 1, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 4 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2023, 1, 15, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 36, UserId = 36, Bio = "Artificial Intelligence and Machine Learning.", HourlyRate = 90.00m, Location = "San Francisco", Education = "PhD CS", YearsOfExperience = 12, Languages = "English", AverageRating = 5.0, TotalLessons = 180, MemberSince = new DateTime(2022, 1, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 12 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2022, 1, 18, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 37, UserId = 37, Bio = "History through the ages.", HourlyRate = 20.00m, Location = "Online", Education = "BA History", YearsOfExperience = 2, Languages = "English", AverageRating = 4.4, TotalLessons = 45, MemberSince = new DateTime(2023, 9, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 1 hour", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2023, 9, 5, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 38, UserId = 38, Bio = "Archaeology and ancient civilizations.", HourlyRate = 40.00m, Location = "Cairo", Education = "PhD Archaeology", YearsOfExperience = 15, Languages = "English", AverageRating = 4.8, TotalLessons = 300, MemberSince = new DateTime(2022, 1, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 6 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2022, 1, 20, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 39, UserId = 39, Bio = "Reading comprehension and book clubs.", HourlyRate = 22.00m, Location = "Online", Education = "BA Lit", YearsOfExperience = 3, Languages = "English", AverageRating = 4.7, TotalLessons = 100, MemberSince = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 2 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2024, 1, 8, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 40, UserId = 40, Bio = "Creative writing masterclass.", HourlyRate = 65.00m, Location = "Edinburgh", Education = "BA Classics", YearsOfExperience = 20, Languages = "English", AverageRating = 4.9, TotalLessons = 500, MemberSince = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 24 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2020, 1, 15, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 41, UserId = 41, Bio = "Guitar and pop music basics.", HourlyRate = 25.00m, Location = "London", Education = "Self-taught", YearsOfExperience = 5, Languages = "English", AverageRating = 4.8, TotalLessons = 150, MemberSince = new DateTime(2022, 1, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 2 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2022, 1, 12, 0, 0, 0, DateTimeKind.Utc) },
+            new Teacher { Id = 42, UserId = 42, Bio = "Classical piano and composition.", HourlyRate = 85.00m, Location = "Vienna", Education = "Conservatory", YearsOfExperience = 30, Languages = "German,English", AverageRating = 5.0, TotalLessons = 800, MemberSince = new DateTime(2018, 1, 1, 0, 0, 0, DateTimeKind.Utc), ResponseTime = "Within 12 hours", VerificationStatus = TeacherVerificationStatus.Verified, VerifiedAt = new DateTime(2018, 1, 20, 0, 0, 0, DateTimeKind.Utc) }
         );
     }
 
